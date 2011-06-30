@@ -1,0 +1,52 @@
+filterScript_handphone 
+======================
+Mind & Media company from Singapore has developed the module. 
+
+
+Date        Author     Changes
+=======================================
+2011-06-21  Hock Sik   To develop bash script to clean up phone numbers and extract only 
+                       handphone numbers
+
+
+Introduction.
+*************
+This script reads an input file containing both phone numbers and handphone numbers.
+It cleans up phone numbers by validating phone numbers using regexp: 
+a) Check on the first few characters (065, +065, (65), (065). etc) and substitute them with no space
+b) Extract and output handphone numbers to a valid file if their lengths are equal to 8 characters
+c) Otherwise, output the rest to an invalid file
+
+Finally, sort out by phone numbers in the invalid and valid files.
+
+Count and show the number of records in these files. 
+
+Running script
+**************
+use chmod 755 to make the script executable. Execute it by typing "./filterScript_handphone. 
+
+Copyrights:
+***********
+GENERAL PUBLIC LICENSE
+June 2011
+
+Copyright (C) 1989, 1991 Free Software Foundation, Inc.
+
+Everyone is permitted to copy and distribute verbatim copies
+of the module. Changing it is allowed.
+
+Mind & Media
+10 UBI Crescent, #03-59 UBI TechPark,
+Singapore 408564
+
+
+UPGRADE
+*******
+For upgrade, pls look for the upgraded version at https://github.com/mindmedia
+
+If you need help, post a message to anthony@mindmedia.com.sg.
+    
+The website is at http://www.mindmedia.com.sg.
+
+Enjoy!
+

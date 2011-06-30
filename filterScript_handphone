@@ -1,0 +1,80 @@
+#!/bin/bash
+# This script reads a file containing valid and invalid phone numbers and output 2 files
+# 1. Output valid handphone numbers to valid file
+# 2. Output invalid phone numbers to invalid file
+
+## first we set variables for the file
+FILE=thecage_handphones.cvs
+FILE_VALID_HANDPHONEFILE=filevalidhandphone.csv
+FILE_INVALID_HANDPHONEFILE=fileinvalidhandphone.csv
+
+
+cat $FILE |\
+awk '{
+FS="	"
+};
+           
+{
+
+        r="[0-9]";
+        a=$1;
+        sub(/+65/,"",a);
+        sub(/(+65)/,"",a);
+        sub(/^065/,"",a);
+        sub(/^0065/,"",a);
+        sub(/^65 /,"",a);
+        sub(/^65-/,"",a);
+        sub(/\(65\)/,"",a);
+        sub(/-/,"",a);
+        gsub(/ /,"",a);
+        
+        #gsub(/[ \t]+/,"",a);        
+                
+        b = substr(a, 0,1);
+
+        if (match(toupper(a),toupper(r)) && (length(a)==8) && (b ==8 || b == 9)) {
+              print a     
+        }
+
+}' |sort -k1 > $FILE_VALID_HANDPHONEFILE
+
+
+echo "The below shows the total nr of valid handphone numbers"
+wc --lines $FILE_VALID_HANDPHONEFILE
+
+
+cat $FILE |\
+awk '{
+FS="	"
+};
+           
+{
+
+
+
+        r="[0-9]";
+        a=$1;
+        sub(/+65/,"",a);
+        sub(/(+65)/,"",a);
+        sub(/^065/,"",a);
+        sub(/^0065/,"",a);
+        sub(/^65 /,"",a);
+        sub(/^65-/,"",a);
+        sub(/\(65\)/,"",a);
+        sub(/-/,"",a);
+        gsub(/ /,"",a);
+        
+        #gsub(/[ \t]+/,"",a);       
+                
+        b = substr(a, 0,1);
+
+        if (!(match(toupper(a),toupper(r)) && (length(a)==8) && (b ==8 || b == 9))) { 
+              print $1     
+        }
+
+}' |sort -k1 > $FILE_INVALID_HANDPHONEFILE
+
+
+echo "The below shows the total nr of invalid handphone numbers"
+wc --lines $FILE_INVALID_HANDPHONEFILE
+echo "RUN END"
